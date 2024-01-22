@@ -25,7 +25,7 @@ function App() {
   async function addTodoContent() {
     const { data, error } = await supabase
       .from("page2")
-      .insert([{ todo: prompt("해야할 일") }])
+      .insert([{ todo: prompt("해야할 일"), todoDate: prompt("날짜") }])
       .select();
     getTodoContents();
   }
@@ -34,7 +34,11 @@ function App() {
       <NavBar />
       <Header />
       {todoContents.map((content) => (
-        <TodoContainer key={content.id} todoContent={content.todo} />
+        <TodoContainer
+          key={content.id}
+          todoContent={content.todo}
+          todoDate={content.todoDate}
+        />
       ))}
       <Footer onClick={addTodoContent} />
     </>

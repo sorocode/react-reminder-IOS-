@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-export default function TodoContainer({ todoContent }) {
+export default function TodoContainer({ todoContent, todoDate }) {
   const [isOver, setIsOver] = useState(false);
   function handleClick() {
     setIsOver((over) => !over);
@@ -44,7 +44,7 @@ export default function TodoContainer({ todoContent }) {
       </div>
       <div className="flex flex-col mx-3">
         <div className={isOver ? "line-through" : textDeco}>{todoContent}</div>
-        <div>모레 오전 9:00</div>
+        <div>{todoDate}</div>
         <hr />
       </div>
     </div>
