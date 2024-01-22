@@ -24,12 +24,6 @@ export default function TodoContainer({ todoContent, todoDate }) {
     return result;
   }
 
-  // 예시: ISO 8601 형식의 날짜 및 시간 문자열
-  const isoString = "2023-12-11T00:00:00+09:00";
-
-  // 변환된 결과 출력
-  console.log(formatDate(isoString));
-
   const [isOver, setIsOver] = useState(false);
   function handleClick() {
     setIsOver((over) => !over);
