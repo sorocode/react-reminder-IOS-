@@ -1,6 +1,22 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { supabase } from "../App";
 
 export default function TodoContainer({ todoContent, todoDate }) {
+  const [content, setContent] = useState(todoContent);
+  function handleInputChange(e) {
+    setContent(e.target.value);
+  }
+  async function handleKeyPress(event) {
+    if (event.keyCode === 13) {
+      const { data, error } = await supabase
+        .from("page2")
+        .update({ todo: event.target.value })
+        .select();
+    }
+  }
+
+  //   async function updateTodoContent(newValue) {}
+
   function formatDate(inputDate) {
     // 입력된 문자열을 Date 객체로 변환
     const date = new Date(inputDate);
@@ -29,6 +45,7 @@ export default function TodoContainer({ todoContent, todoDate }) {
     setIsOver((over) => !over);
   }
   let textDeco = "font-bold";
+
   return (
     <div className="flex mx-10 my-3">
       <div>
@@ -66,7 +83,14 @@ export default function TodoContainer({ todoContent, todoDate }) {
         </button>
       </div>
       <div className="flex flex-col mx-3">
-        <div className={isOver ? "line-through" : textDeco}>{todoContent}</div>
+        <div className={isOver ? "line-through" : textDeco}>
+          <input
+            type="text"
+            onChange={handleInputChange}
+            value={content}
+            onKeyDown={(e) => handleKeyPress(e)}
+          />
+        </div>
         <div>{formatDate(todoDate)}</div>
         <hr />
       </div>

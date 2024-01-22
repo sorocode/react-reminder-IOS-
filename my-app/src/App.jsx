@@ -7,8 +7,7 @@ import TodoContainer from "./components/TodoContainer";
 
 const supabaseUrl = "https://zwxllgrjrwjibqywmpxv.supabase.co";
 const supabaseAconKey = import.meta.env.VITE_SUPABSE_KEY;
-const supabase = createClient(supabaseUrl, supabaseAconKey);
-
+export const supabase = createClient(supabaseUrl, supabaseAconKey);
 function App() {
   const [todoContents, setTodoContents] = useState([]);
 
@@ -29,6 +28,7 @@ function App() {
       .select();
     getTodoContents();
   }
+
   return (
     <>
       <NavBar />
