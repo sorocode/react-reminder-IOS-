@@ -1,24 +1,49 @@
-export default function TodoContainer() {
+import { useState } from "react";
+
+export default function TodoContainer({ todoContent }) {
+  const [isOver, setIsOver] = useState(false);
+  function handleClick() {
+    setIsOver((over) => !over);
+  }
+  let textDeco = "font-bold";
   return (
     <div className="flex mx-10 my-3">
       <div>
-        <button className="text-gray-600 hover:text-gray-700">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="20"
-            height="20"
-            viewBox="0 0 20 20"
-            fill="none"
-          >
-            <path
-              d="M10 0C4.48 0 0 4.48 0 10C0 15.52 4.48 20 10 20C15.52 20 20 15.52 20 10C20 4.48 15.52 0 10 0ZM10 18C5.58 18 2 14.42 2 10C2 5.58 5.58 2 10 2C14.42 2 18 5.58 18 10C18 14.42 14.42 18 10 18Z"
-              fill="black"
-            />
-          </svg>
+        <button
+          onClick={handleClick}
+          className="text-gray-600 hover:text-gray-700"
+        >
+          {isOver ? (
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="20"
+              height="20"
+              viewBox="0 0 20 20"
+              fill="none"
+            >
+              <path
+                d="M10 5C7.24 5 5 7.24 5 10C5 12.76 7.24 15 10 15C12.76 15 15 12.76 15 10C15 7.24 12.76 5 10 5ZM10 0C4.48 0 0 4.48 0 10C0 15.52 4.48 20 10 20C15.52 20 20 15.52 20 10C20 4.48 15.52 0 10 0ZM10 18C5.58 18 2 14.42 2 10C2 5.58 5.58 2 10 2C14.42 2 18 5.58 18 10C18 14.42 14.42 18 10 18Z"
+                fill="#F19A37"
+              />
+            </svg>
+          ) : (
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="20"
+              height="20"
+              viewBox="0 0 20 20"
+              fill="none"
+            >
+              <path
+                d="M10 0C4.48 0 0 4.48 0 10C0 15.52 4.48 20 10 20C15.52 20 20 15.52 20 10C20 4.48 15.52 0 10 0ZM10 18C5.58 18 2 14.42 2 10C2 5.58 5.58 2 10 2C14.42 2 18 5.58 18 10C18 14.42 14.42 18 10 18Z"
+                fill="black"
+              />
+            </svg>
+          )}
         </button>
       </div>
       <div className="flex flex-col mx-3">
-        <div className="font-bold">수강신청하기</div>
+        <div className={isOver ? "line-through" : textDeco}>{todoContent}</div>
         <div>모레 오전 9:00</div>
         <hr />
       </div>

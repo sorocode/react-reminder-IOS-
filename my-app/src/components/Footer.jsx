@@ -1,6 +1,9 @@
-export default function Footer() {
+export default function Footer({ onClick }) {
   return (
-    <button className="flex text-orange-400 hover:text-orange-500 text-xl font-semibold font-['Inter'] ml-5 my-80">
+    <button
+      onClick={onClick}
+      className="flex text-orange-400 hover:text-orange-500 text-xl font-semibold font-['Inter'] ml-5 my-80"
+    >
       <div>
         <svg
           xmlns="http://www.w3.org/2000/svg"
