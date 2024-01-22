@@ -25,7 +25,7 @@ function App() {
   async function addTodoContent() {
     const { data, error } = await supabase
       .from("page2")
-      .insert([{ todo: prompt("해야할 일"), todoDate: prompt("날짜") }])
+      .insert([{ todo: prompt("해야할 일"), todoDate: prompt("날짜 및 시간") }])
       .select();
     getTodoContents();
   }

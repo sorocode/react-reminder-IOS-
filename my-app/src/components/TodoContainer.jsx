@@ -1,6 +1,35 @@
 import { useState } from "react";
 
 export default function TodoContainer({ todoContent, todoDate }) {
+  function formatDate(inputDate) {
+    // 입력된 문자열을 Date 객체로 변환
+    const date = new Date(inputDate);
+
+    // 연, 월, 일, 시간, 분 추출
+    const year = date.getFullYear();
+    const month = date.getMonth() + 1; // getMonth는 0부터 시작하므로 1을 더함
+    const day = date.getDate();
+    const hours = date.getHours() - 9;
+    // const minutes = date.getMinutes();
+
+    // 오전 또는 오후 설정
+    const ampm = hours >= 12 ? "오후" : "오전";
+
+    // 12시간제로 변경
+    const formattedHours = hours % 12 === 0 ? 12 : hours % 12;
+
+    // 결과 문자열 생성
+    const result = `${year}년 ${month}월 ${day}일 ${ampm} ${formattedHours}시`;
+
+    return result;
+  }
+
+  // 예시: ISO 8601 형식의 날짜 및 시간 문자열
+  const isoString = "2023-12-11T00:00:00+09:00";
+
+  // 변환된 결과 출력
+  console.log(formatDate(isoString));
+
   const [isOver, setIsOver] = useState(false);
   function handleClick() {
     setIsOver((over) => !over);
@@ -44,7 +73,7 @@ export default function TodoContainer({ todoContent, todoDate }) {
       </div>
       <div className="flex flex-col mx-3">
         <div className={isOver ? "line-through" : textDeco}>{todoContent}</div>
-        <div>{todoDate}</div>
+        <div>{formatDate(todoDate)}</div>
         <hr />
       </div>
     </div>
