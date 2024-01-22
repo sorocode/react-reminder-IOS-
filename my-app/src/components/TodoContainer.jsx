@@ -2,7 +2,7 @@ export default function TodoContainer() {
   return (
     <div className="flex mx-10 my-3">
       <div>
-        <button>
+        <button className="text-gray-600 hover:text-gray-700">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="20"
