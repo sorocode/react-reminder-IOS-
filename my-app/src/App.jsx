@@ -1,5 +1,6 @@
 // import { useEffect, useState } from "react";
 // import { createClient } from "@supabase/supabase-js";
+import Footer from "./components/Footer";
 import Header from "./components/Header";
 import NavBar from "./components/NavBar";
 import TodoContainer from "./components/TodoContainer";
@@ -37,6 +38,7 @@ function App() {
       <Header />
       <TodoContainer />
       <TodoContainer />
+      <Footer />
     </>
   );
 }
