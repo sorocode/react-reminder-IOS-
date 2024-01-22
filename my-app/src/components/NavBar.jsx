@@ -1,7 +1,7 @@
 export default function NavBar() {
   return (
-    <div className="flex flex-row justify-between my-3 mx-2">
-      <div className="text-blue-600 font-bold">&lt; 목록</div>
+    <div className="flex flex-row justify-between my-7 mx-3">
+      <div className="text-blue-600 font-bold text-xl">&lt; 목록</div>
       <div className="flex">
         <div className="mx-2">
           <svg

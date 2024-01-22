@@ -1,6 +1,8 @@
 // import { useEffect, useState } from "react";
 // import { createClient } from "@supabase/supabase-js";
+import Header from "./components/Header";
 import NavBar from "./components/NavBar";
+import TodoContainer from "./components/TodoContainer";
 
 // const supabaseUrl = "https://zwxllgrjrwjibqywmpxv.supabase.co";
 // const supabaseAconKey = import.meta.env.VITE_SUPABASE_KEY;
@@ -32,6 +34,9 @@ function App() {
   return (
     <>
       <NavBar />
+      <Header />
+      <TodoContainer />
+      <TodoContainer />
     </>
   );
 }
