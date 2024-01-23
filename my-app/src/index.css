@@ -3,6 +3,6 @@
 @tailwind utilities;
 
 hr {
-  width: 700%; /* 수평선의 너비를 50%로 설정합니다. */
+  width: 200%; /* 수평선의 너비를 50%로 설정합니다. */
   margin: 5px auto; /* 가운데 정렬을 위해 margin 속성을 사용합니다. */
 }

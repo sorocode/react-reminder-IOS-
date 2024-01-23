@@ -30,7 +30,7 @@ function App() {
   }
 
   return (
-    <>
+    <div className="grid place-content-center my-20">
       <NavBar />
       <Header />
       {todoContents.map((content) => (
@@ -40,8 +40,10 @@ function App() {
           todoDate={content.todoDate}
         />
       ))}
-      <Footer onClick={addTodoContent} />
-    </>
+      <div>
+        <Footer onClick={addTodoContent} />
+      </div>
+    </div>
   );
 }
 
