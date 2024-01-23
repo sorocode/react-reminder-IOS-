@@ -1,22 +1,37 @@
 import { useEffect, useState } from "react";
-import { supabase } from "../App";
+import { supabase } from "../utils/supabase";
 
-export default function TodoContainer({ todoContent, todoDate }) {
+export default function TodoContainer({ todoContent, todoDate, todoId }) {
   const [content, setContent] = useState(todoContent);
+
+  useEffect(() => {
+    async function getContents() {
+      let { data: page2, error } = await supabase.from("page2").select("*");
+    }
+    getContents();
+  }, [content]);
   function handleInputChange(e) {
     setContent(e.target.value);
   }
-  async function handleKeyPress(event) {
-    if (event.keyCode === 13) {
+  async function handleSubmit(event, updatedContent, id) {
+    event.preventDefault();
+    try {
       const { data, error } = await supabase
         .from("page2")
-        .update({ todo: event.target.value })
+        .update({ todo: updatedContent })
+        .eq("id", id)
         .select();
+
+      if (error) {
+        console.error("Error updating data:", error);
+      } else {
+        // console.log("Update successful:", data);
+        // alert("저장되었습니다.");
+      }
+    } catch (error) {
+      console.error("Unexpected error:", error);
     }
   }
-
-  //   async function updateTodoContent(newValue) {}
-
   function formatDate(inputDate) {
     // 입력된 문자열을 Date 객체로 변환
     const date = new Date(inputDate);
@@ -26,7 +41,6 @@ export default function TodoContainer({ todoContent, todoDate }) {
     const month = date.getMonth() + 1; // getMonth는 0부터 시작하므로 1을 더함
     const day = date.getDate();
     const hours = date.getHours() - 9;
-    // const minutes = date.getMinutes();
 
     // 오전 또는 오후 설정
     const ampm = hours >= 12 ? "오후" : "오전";
@@ -41,9 +55,11 @@ export default function TodoContainer({ todoContent, todoDate }) {
   }
 
   const [isOver, setIsOver] = useState(false);
+
   function handleClick() {
     setIsOver((over) => !over);
   }
+
   let textDeco = "font-bold";
 
   return (
@@ -84,12 +100,16 @@ export default function TodoContainer({ todoContent, todoDate }) {
       </div>
       <div className="flex flex-col mx-3">
         <div className={isOver ? "line-through" : textDeco}>
-          <input
-            type="text"
-            onChange={handleInputChange}
-            value={content}
-            onKeyDown={(e) => handleKeyPress(e)}
-          />
+          <form onSubmit={(e) => handleSubmit(e, content, todoId)}>
+            <input
+              type="text"
+              onChange={(e) => handleInputChange(e)}
+              value={content}
+              name="task"
+              // onKeyDown={(e) => handleKeyPress(e, myRowNum)}
+            />
+            <input type="submit" value="" />
+          </form>
         </div>
         <div>{formatDate(todoDate)}</div>
         <hr />

@@ -1,13 +1,10 @@
 import { useEffect, useState } from "react";
-import { createClient } from "@supabase/supabase-js";
 import Footer from "./components/Footer";
 import Header from "./components/Header";
 import NavBar from "./components/NavBar";
 import TodoContainer from "./components/TodoContainer";
+import { supabase } from "./utils/supabase";
 
-const supabaseUrl = "https://zwxllgrjrwjibqywmpxv.supabase.co";
-const supabaseAconKey = import.meta.env.VITE_SUPABSE_KEY;
-export const supabase = createClient(supabaseUrl, supabaseAconKey);
 function App() {
   const [todoContents, setTodoContents] = useState([]);
 
@@ -17,7 +14,10 @@ function App() {
   }, []);
 
   async function getTodoContents() {
-    let { data: table, error } = await supabase.from("page2").select("*");
+    let { data: table, error } = await supabase
+      .from("page2")
+      .select("*")
+      .order("id");
     setTodoContents(table);
   }
 
@@ -38,6 +38,7 @@ function App() {
           key={content.id}
           todoContent={content.todo}
           todoDate={content.todoDate}
+          todoId={content.id}
         />
       ))}
       <div>
